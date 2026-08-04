@@ -1,0 +1,329 @@
+.hero {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  height: 40vh;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 45%, transparent 70%);
+  z-index: -1;
+}
+
+.nombre {
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  text-align: center;
+  margin: 0;
+}
+
+.nombre--bkt {
+  font-size: 27vh;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 10px rgba(213, 168, 255, 0.7),
+    0 0 30px rgba(213, 168, 255, 0.4);
+  animation: resplandor 3s ease-in-out infinite;
+}
+
+@keyframes resplandor {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(213, 168, 255, 0.7),
+      0 0 30px rgba(213, 168, 255, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 16px rgba(213, 168, 255, 0.9),
+      0 0 45px rgba(213, 168, 255, 0.5);
+  }
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.fondo-emojis {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 28px;
+  animation: volar linear infinite;
+  filter: drop-shadow(0 0 6px rgba(213, 168, 255, 0.4));
+}
+
+@keyframes volar {
+  0%   { transform: translateX(-10vw) translateY(0); }
+  50%  { transform: translateX(50vw)  translateY(-15px); }
+  100% { transform: translateX(110vw) translateY(0); }
+}
+
+.cancion {
+  position: absolute;
+  background: none;
+  border: none;
+  color: rgba(213, 168, 255, 0.452);
+  font-family: "Permanent Marker", cursive;
+  font-size: 1.4vw;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  padding: 4px 8px;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.6),
+    1px 1px 0 rgba(255, 255, 255, 0.15),
+    -1px -1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
+  
+}
+
+.cancion:hover {
+  color: #fff;
+  transform: scale(1.1) rotate(0deg) !important;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 16px rgba(255, 255, 255, 0.4);
+}
+
+.widget__contenido {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.vinilo {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle, #1a1a1a 0px, #1a1a1a 4px, #0a0a0a 5px, #0a0a0a 8px
+  );
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: girar 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinilo.girando {
+  animation-play-state: running;
+}
+
+.vinilo__centro {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 5px #0a0a0a;
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.widget__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+.widget {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: min(90vw, 520px);
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04) 0%, transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px,
+      transparent 1px, transparent 3px
+    ),
+    linear-gradient(160deg, #141414 0%, #0a0a0a 60%, #000 100%);
+
+  padding: 34px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.8);
+}
+
+.widget::-webkit-scrollbar {
+  display: none;
+}
+
+.widget::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(213, 168, 255, 0.4) 60%,
+    rgba(160, 80, 255, 0.4) 72%,
+    rgba(60, 20, 90, 0.6) 85%,
+    rgba(10, 5, 10, 0.85) 100%
+  );
+  filter: blur(9px);
+  clip-path: inherit;
+  animation: brasa 2.5s ease-in-out infinite;
+}
+
+@keyframes brasa {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.widget.activo {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.widget__cerrar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+#widgetTitulo {
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2em;
+  margin-top: 0;
+}
+
+#widgetLetra {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Oswald", sans-serif;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.hint {
+  position: fixed;
+  bottom: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Oswald", sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 6;
+  pointer-events: none;
+  animation: parpadeo-hint 2s ease-in-out infinite;
+  transition: opacity 1s ease;
+}
+
+@keyframes parpadeo-hint {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.hint.oculto {
+  opacity: 0;
+}
+
+.creditos {
+  position: fixed;
+  bottom: 2vh;
+  left: 2vw;
+  color: rgba(173, 52, 253, 0.637);
+  font-family: "Oswald", sans-serif;
+  font-size: 1.3em;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  z-index: 6;
+  transition: color 0.3s ease;
+}
+
+.creditos:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .nombre--bkt {
+    font-size: 12vh;
+  }
+
+  .hero::before {
+    width: 90vw;
+    height: 30vh;
+  }
+
+  .cancion {
+    font-size: 4vw;
+  }
+
+  .emoji {
+    font-size: 20px;
+  }
+
+  .widget {
+    width: 92vw;
+    padding: 22px;
+  }
+
+  .vinilo {
+    width: 90px;
+    height: 90px;
+  }
+
+  .vinilo__centro {
+    width: 24px;
+    height: 24px;
+  }
+
+  .widget__contenido {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  #widgetTitulo {
+    font-size: 1.5em;
+  }
+
+  .creditos {
+    font-size: 0.9em;
+  }
+
+  .hint {
+    font-size: 0.75em;
+    bottom: 8vh;
+  }
+}
