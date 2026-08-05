@@ -246,7 +246,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
   width: min(90vw, 520px);
-  max-height: 90vh;
+  max-height: 90dvh;
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: none;

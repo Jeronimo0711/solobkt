@@ -161,6 +161,7 @@ contenedorCanciones.addEventListener("click", (event) => {
 
   widgetAudio.currentTime = inicio;
   widget.classList.add("activo");
+  document.body.style.overflow = "hidden";  // 👈 nueva línea
   widgetAudio.play();
   vinilo.classList.add("girando");
 
@@ -170,6 +171,7 @@ contenedorCanciones.addEventListener("click", (event) => {
       widgetAudio.pause();
       widgetAudio.ontimeupdate = null;
       widget.classList.remove("activo");
+      document.body.style.overflow = "";  // 👈 nueva línea
       vinilo.classList.remove("girando");
     }
   };
@@ -177,6 +179,7 @@ contenedorCanciones.addEventListener("click", (event) => {
 
 cerrarWidget.addEventListener("click", () => {
   widget.classList.remove("activo");
+  document.body.style.overflow = "";  // 👈 nueva línea
   widgetAudio.pause();
   widgetAudio.currentTime = 0;
   vinilo.classList.remove("girando");
