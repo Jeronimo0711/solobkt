@@ -144,6 +144,20 @@ const widgetAudio = document.getElementById("widgetAudio");
 const cerrarWidget = document.getElementById("cerrarWidget");
 const hint = document.getElementById("hint");
 
+let scrollGuardado = 0;
+
+function abrirBloqueoScroll() {
+  scrollGuardado = window.scrollY;
+  document.body.style.top = `-${scrollGuardado}px`;
+  document.body.classList.add("widget-abierto");
+}
+
+function cerrarBloqueoScroll() {
+  document.body.classList.remove("widget-abierto");
+  document.body.style.top = "";
+  window.scrollTo(0, scrollGuardado);
+}
+
 contenedorCanciones.addEventListener("click", (event) => {
   if (!event.target.classList.contains("cancion")) return;
 
@@ -161,7 +175,7 @@ contenedorCanciones.addEventListener("click", (event) => {
 
   widgetAudio.currentTime = inicio;
   widget.classList.add("activo");
-  document.body.style.overflow = "hidden";  // 👈 nueva línea
+  abrirBloqueoScroll();
   widgetAudio.play();
   vinilo.classList.add("girando");
 
@@ -171,7 +185,7 @@ contenedorCanciones.addEventListener("click", (event) => {
       widgetAudio.pause();
       widgetAudio.ontimeupdate = null;
       widget.classList.remove("activo");
-      document.body.style.overflow = "";  // 👈 nueva línea
+      cerrarBloqueoScroll();
       vinilo.classList.remove("girando");
     }
   };
@@ -179,7 +193,7 @@ contenedorCanciones.addEventListener("click", (event) => {
 
 cerrarWidget.addEventListener("click", () => {
   widget.classList.remove("activo");
-  document.body.style.overflow = "";  // 👈 nueva línea
+  cerrarBloqueoScroll();
   widgetAudio.pause();
   widgetAudio.currentTime = 0;
   vinilo.classList.remove("girando");
